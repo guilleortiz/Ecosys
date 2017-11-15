@@ -39,7 +39,7 @@ function Start () {
 	button.mousePressed(Button);
 
 	buttonOff = createButton('stop game');
-	buttonOff.position(50, 0);
+	buttonOff.position(90, 0);
 	buttonOff.mousePressed(ButtonOff);
 
 }
@@ -181,7 +181,7 @@ function Ball() {
 	this.colorComida="green";
 	this.envejecimiento=-0.05;
 
-	this.Mimouse;
+	this.Mimouse;//nada que ver con el mouse
 	this.caminoComida=createVector(0,0);
 
 	this.update=function(){ 
@@ -267,11 +267,11 @@ function Ball() {
 
 	this.comer=function(presa){
 		
-		var d= dist(presa.x,presa.y,this.location.x,this.location.y);
+		var d= dist(presa.x,presa.y,this.location.x,this.location.y);//distancian entre presa y localizacion actual
 
 		noFill();
 
-		if(d<this.tam){
+		if(d<this.tam){//si esta tocando la comida, crece hasta el max de 80
 			if (this.tam>80) {
 				this.tam+=0;
 			}else{this.tam+=5;}
@@ -280,7 +280,7 @@ function Ball() {
 			console.log("comiendo");
 			
 
-		} else{
+		} else{//si no esta tocando la comida empieza el proceso de muerte
 
 			this.muere();
 			
@@ -289,7 +289,7 @@ function Ball() {
 
 	}
 
-	this.changeVelocity=function  () {
+	this.changeVelocity=function  () {//cambia velocidad segun su tamaño
 
 		if (this.tam>=50) {
 				this.topSpeed=float(1);
@@ -313,26 +313,28 @@ function Ball() {
 
 
 	
-	this.track=function () {
+	this.track=function () {//la chicha
+
 		var vaina=createVector(random(width),random(height));
 		
-		tracking.ColorTracker.registerColor('green', function(r, g, b) {
+		tracking.ColorTracker.registerColor('green', function(r, g, b) {//registramos el color a seguir
 		  if (r < 50 && g > 200 && b < 50) {
 		    return true;
 		  }
 		  return false;
 		});
 
-		tracker = new tracking.ColorTracker([this.getComida()]);
+		tracker = new tracking.ColorTracker([this.getComida()]);//instancia track del color de la comida
 
 		window.plot = function(x, y, w, h, color) {
 		  
 	  		var tempvect=createVector(x,y);
 	  		noFill();
 	  		stroke('red');
-	  		rect(x-10, y-10, w+20, h+20);
+	  		rect(x-10, y-10, w+20, h+20);//creamos un rectangulo al rededor de un color detectado
+	  									//BUG----La bola sigue a un cesded diferente al del rectangulo
 
-			fill(255);
+			fill(255);//mostramos x,y cartesianos
 	  		strokeWeight(0);
 			textSize(12);
 			textStyle(NORMAL);
@@ -353,17 +355,21 @@ function Ball() {
 				
 				event.data.forEach(function(rect) {
 					this.estado="siguendo";
-					this.caminoComida=window.plot(rect.x, rect.y, rect.width, rect.height, rect.color); 
+
+					console.log("DEBUGIN: "+rect.x+","+rect.y+""+rect.color);
+
+					this.caminoComida=window.plot(rect.x, rect.y, rect.width, rect.height, rect.color); //le pasamos 
+																										//datos del cuadrado
 			    	//console.log('tracking this.caminoComida= '+	this.caminoComida);
 			    	
 			    	this.extract=function (kk) {
 		      			vaina=kk;
-		      
 		      		}
-			    	this.extract(this.caminoComida);
+
+			    	this.extract(this.caminoComida);//creo que usado para extraer el camino a comida
 		    	
-		  });
-		}
+		  		});
+			}
 			
 		});
 
@@ -430,7 +436,7 @@ function Cesped () {
 
 	this.eliminar=function () {
 		
-		this.color='#a6a6a6';
+		this.color='#fffff';//color de fondo es a6a6a6
 		
 	}
 }
