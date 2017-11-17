@@ -17,6 +17,9 @@ var bolas=[];
 var cesped;
 var cespdes=[];
 
+var misil;
+var misiles=[];
+
 var idInterval;
 var tamanioComida=50;
 
@@ -87,12 +90,12 @@ function draw() {
 	objY=mouseY;
 	
 
-	if (stop) {//creamos dos cesped // DEBUGGING
+	/*if (stop) {//creamos dos cesped // DEBUGGING
 		cespdes.push(new Cesped());
 		cespdes.push(new Cesped());
 		stop=false;
 
-	} 
+	} */
 
 	
 
@@ -127,14 +130,25 @@ function draw() {
 		    }
 		    
 		    if (mouseButton == CENTER){
-		    
+
+		    	if (misiles.length<1) {
+			 	
+			 		misiles.push(new Misil(mouseX,mouseY));
+
+				}else{
+					
+			 		return
+			 	}
+
+		    	
+		    /*
 		      	if (cespdes.length<100) {
 			 		cespdes.push(new Cesped());
 			 		cespdes[random(cespdes.length)].color='magenta';
 			 		
 			 	}else{
 			 		//console.log('limite de cesped');
-			 	}
+			 	}*/
 		    }
   		}
 
@@ -154,6 +168,12 @@ function draw() {
   		}
 
   	
+  	}
+
+  	for(var k = 0; k < misiles.length; k++){
+  		misiles[k].live();
+  		
+  		
   	}
 	
 
