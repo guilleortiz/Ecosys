@@ -1,4 +1,4 @@
-function Misil(origenX,origenY) {
+function Ia(origenX,origenY) {
 
 	var t=0.02;
 	var x = noise(t);
@@ -190,7 +190,6 @@ function Misil(origenX,origenY) {
 				
 
 			}else{
-				//console.log('track visto');
 				
 				event.data.forEach(function(rect) {
 					this.estado="siguendo";

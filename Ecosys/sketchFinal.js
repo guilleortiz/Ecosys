@@ -17,8 +17,8 @@ var bolas=[];
 var cesped;
 var cespdes=[];
 
-var misil;
-var misiles=[];
+var ia;
+var iaArray=[];
 
 var idInterval;
 var tamanioComida=50;
@@ -32,10 +32,17 @@ function Start () {
 	sigue=createVector(0, 0);
 
 	var canvas = createCanvas(400,400);
+
+	
+
 	canvas.id("canvas");
 	micanvas = document.getElementById("canvas");
 	document.querySelector('.demo-container').appendChild(micanvas);
 	
+	var x = (windowWidth - width) / 2;
+ 	var y = (windowHeight - height) / 2;
+	canvas.position(x,y);
+
 	ctx = micanvas.getContext("2d");
 	button = createButton('New game');
 	button.position(0, 0);
@@ -54,6 +61,8 @@ function setup() {
 	Start();
 	var stop=true;
 
+	iaArray.push(new Ia(mouseX,mouseY));
+	cespdes.push(new Cesped());
 }
 
 function ButtonOff () {
@@ -82,9 +91,11 @@ function creceCesped () {
 
 function draw() {
 
-	var idInterval=setInterval(noLoop,60000);
+	//var idInterval=setInterval(noLoop,60000);
 
 	background('#a6a6a6');
+
+	
 	
 	objX=mouseX;
 	objY=mouseY;
@@ -131,9 +142,9 @@ function draw() {
 		    
 		    if (mouseButton == CENTER){
 
-		    	if (misiles.length<1) {
+		    	if (iaArray.length<1) {
 			 	
-			 		misiles.push(new Misil(mouseX,mouseY));
+			 		iaArray.push(new Ia(mouseX,mouseY));
 
 				}else{
 					
@@ -170,8 +181,8 @@ function draw() {
   	
   	}
 
-  	for(var k = 0; k < misiles.length; k++){
-  		misiles[k].live();
+  	for(var k = 0; k < iaArray.length; k++){
+  		iaArray[k].live();
   		
   		
   	}

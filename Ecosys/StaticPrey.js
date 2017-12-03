@@ -36,9 +36,9 @@ function Cesped () {//static prey
 	}
 	this.muere=function () {
 		
-		for(var k = 0; k < bolas.length; k++){
+		for(var k = 0; k < iaArray.length; k++){
 
-			var d= dist(bolas[k].location.x,bolas[k].location.y,this.location.x,this.location.y);
+			var d= dist(iaArray[k].location.x,iaArray[k].location.y,this.location.x,this.location.y);
 			if(d<this.tam){
 				
 				if (this.tam<30) {
